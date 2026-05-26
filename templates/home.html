@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% block title %}BLADE & GRACE — Premium Barbershop Lagos{% endblock %}
+
+{% block head %}
+<style>
+   /* ── HERO ── */
+   .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+   }
+
+   .hero-since {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+   }
+
+   .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+   }
+
+   .hero-sub {
+      margin-top: 1.5rem;
+      max-width: 380px;
+      font-size: 1.15rem;
+   }
+
+   .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+   }
+
+   /* Decorative side panel */
+   .hero-panel {
+      position: relative;
+      height: 520px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .hero-panel-bg {
+      position: absolute;
+      inset: 0;
+      background:
+         radial-gradient(ellipse at 30% 20%, rgba(201, 168, 76, 0.12) 0%, transparent 60%),
+         radial-gradient(ellipse at 70% 80%, rgba(139, 44, 44, 0.1) 0%, transparent 60%);
+   }
+
+   .barber-pole {
+      position: relative;
+      width: 60px;
+      height: 220px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 3px solid rgba(201, 168, 76, 0.3);
+      background: #1a1715;
+      margin-bottom: 2rem;
+   }
+
+   .pole-stripe {
+      position: absolute;
+      width: 200%;
+      height: 28px;
+      background: var(--gold);
+      opacity: 0.85;
+      transform-origin: left center;
+      animation: spinPole 3s linear infinite;
+   }
+
+   .pole-stripe.red {
+      background: var(--red);
+      opacity: 0.7;
+   }
+
+   @keyframes spinPole {
+      from {
+         transform: translateY(-28px) rotate(-35deg);
+      }
+
+      to {
+         transform: translateY(220px) rotate(-35deg);
+      }
+   }
+
+   .pole-stripe:nth-child(1) {
+      animation-delay: 0s;
+   }
+
+   .pole-stripe:nth-child(2) {
+      animation-delay: -0.75s;
+      background: var(--red);
+      opacity: 0.7;
+   }
+
+   .pole-stripe:nth-child(3) {
+      animation-delay: -1.5s;
+   }
+
+   .pole-stripe:nth-child(4) {
+      animation-delay: -2.25s;
+      background: var(--red);
+      opacity: 0.7;
+   }
+
+   .pole-stripe:nth-child(5) {
+      animation-delay: -1s;
+      background: #f0e6d0;
+      opacity: 0.5;
+   }
+
+   .pole-stripe:nth-child(6) {
+      animation-delay: -2s;
+      background: #f0e6d0;
+      opacity: 0.5;
+   }
+
+   .panel-tagline {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold);
+      text-align: center;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+   }
+
+   /* ── STATS BAR ── */
+   .stats {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--surface);
+   }
+
+   .stat {
+      padding: 2rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+   }
+
+   .stat:last-child {
+      border-right: none;
+   }
+
+   .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+   }
+
+   .stat-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      display: block;
+   }
+
+   /* ── WHY US ── */
+   .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+   }
+
+   .why-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      background: var(--card);
+      transition: border-color 0.3s;
+      animation: fadeUp 0.6s ease both;
+   }
+
+   .why-card:hover {
+      border-color: var(--gold);
+   }
+
+   .why-card:nth-child(1) {
+      animation-delay: 0.1s;
+   }
+
+   .why-card:nth-child(2) {
+      animation-delay: 0.2s;
+   }
+
+   .why-card:nth-child(3) {
+      animation-delay: 0.3s;
+   }
+
+   .why-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+   }
+
+   .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+   }
+
+   .why-desc {
+      font-size: 0.95rem;
+   }
+
+   .section-pad {
+      padding: 5rem 0;
+   }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+   <div>
+      <p class="hero-since fade fade-1">— Est. 2008, Lagos Island</p>
+      <h1 class="fade fade-2">
+         The Art of<br>
+         <em>The Cut.</em>
+      </h1>
+      <p class="hero-sub fade fade-3">
+         Where precision meets tradition. Step into Lagos' finest gentlemen's barbershop and leave looking — and feeling
+         — exceptional.
+      </p>
+      <div class="hero-actions fade fade-4">
+         <a href="/booking" class="btn btn-gold">Book Appointment</a>
+         <a href="/services" class="btn btn-outline">View Services</a>
+      </div>
+   </div>
+
+   <div class="hero-panel fade fade-3">
+      <div class="hero-panel-bg"></div>
+      <div class="barber-pole">
+         <div class="pole-stripe"></div>
+         <div class="pole-stripe red"></div>
+         <div class="pole-stripe"></div>
+         <div class="pole-stripe red"></div>
+         <div class="pole-stripe"></div>
+         <div class="pole-stripe"></div>
+      </div>
+      <p class="panel-tagline">"A man who looks good<br>feels good — we make<br>that happen."</p>
+   </div>
+</section>
+
+<!-- STATS -->
+<div class="stats fade fade-5">
+   {% for stat in stats %}
+   <div class="stat">
+      <span class="stat-num">{{ stat.number }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+   </div>
+   {% endfor %}
+</div>
+
+<!-- WHY US -->
+<div class="container section-pad">
+   <div style="text-align:center; margin-bottom:1rem;" class="fade fade-1">
+      <div class="section-label" style="justify-content:center;">Why Choose Us</div>
+      <h2>The Blade & Grace<br>Difference</h2>
+   </div>
+
+   <div class="why-grid">
+      {% for item in why %}
+      <div class="why-card">
+         <div class="why-icon">{{ item.icon }}</div>
+         <div class="why-title">{{ item.title }}</div>
+         <p class="why-desc">{{ item.desc }}</p>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+
+{% endblock %}

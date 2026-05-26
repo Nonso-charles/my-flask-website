@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BLADE & GRACE — Premium Barbershop{% endblock %}</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:wght@300;400;500&family=Raleway:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #141210;
+            --surface: #1c1917;
+            --card: #211f1c;
+            --border: #2e2b27;
+            --gold: #c9a84c;
+            --gold-lt: #e8c97a;
+            --cream: #f0e6d0;
+            --text: #d9cfc0;
+            --muted: #7a6e60;
+            --red: #8b2c2c;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ────────── NOISE TEXTURE OVERLAY ────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.4;
+        }
+
+        /* ────────── NAV ────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            height: 72px;
+            background: rgba(20, 18, 16, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-brand span {
+            color: var(--cream);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: color 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
+        }
+
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-book {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--bg) !important;
+            background: var(--gold);
+            padding: 0.55rem 1.4rem !important;
+            border-radius: 3px;
+            transition: background 0.25s !important;
+        }
+
+        .nav-book:hover {
+            background: var(--gold-lt) !important;
+            color: var(--bg) !important;
+        }
+
+        /* ────────── SHARED LAYOUT ────────── */
+        .page {
+            padding-top: 72px;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+        }
+
+        /* ────────── SECTION LABEL ────────── */
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 30px;
+            background: var(--gold);
+            opacity: 0.4;
+        }
+
+        /* ────────── DISPLAY HEADINGS ────────── */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--cream);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.1;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cream);
+        }
+
+        p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* ────────── GOLD RULE ────────── */
+        .gold-rule {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            opacity: 0.3;
+            margin: 4rem 0;
+        }
+
+        /* ────────── BUTTON ────────── */
+        .btn {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: none;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-lt);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* ────────── FOOTER ────────── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            font-family: 'Raleway', sans-serif;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+
+        footer .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ────────── ANIMATIONS ────────── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade {
+            animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .fade-1 {
+            animation-delay: 0.05s;
+        }
+
+        .fade-2 {
+            animation-delay: 0.15s;
+        }
+
+        .fade-3 {
+            animation-delay: 0.25s;
+        }
+
+        .fade-4 {
+            animation-delay: 0.35s;
+        }
+
+        .fade-5 {
+            animation-delay: 0.45s;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <nav>
+        <a class="nav-brand" href="/">Blade <span>&</span> Grace</a>
+        <div class="nav-links">
+            <a href="/" {% if active=='home' %}class="active" {% endif %}>Home</a>
+            <a href="/about" {% if active=='about' %}class="active" {% endif %}>About</a>
+            <a href="/services" {% if active=='services' %}class="active" {% endif %}>Services</a>
+            <a href="/booking" class="nav-book {% if active == 'booking' %}active{% endif %}">Book Now</a>
+        </div>
+    </nav>
+
+    <div class="page">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="container">
+            <span class="footer-brand">BLADE & GRACE</span>
+            <p>14 Broad Street, Lagos Island · Open Tue–Sun, 9am–8pm · +234 801 234 5678</p>
+            <p style="margin-top:0.5rem;">© 2026 Blade & Grace Barbershop. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
