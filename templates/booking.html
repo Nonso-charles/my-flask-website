@@ -4,64 +4,67 @@
 {% block head %}
 <style>
     .booking-wrap {
-        max-width: 1080px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 7rem 2.5rem 5rem;
+        padding: 7rem 5% 5rem;
         display: grid;
-        grid-template-columns: 1fr 1.4fr;
+        grid-template-columns: 1fr 1.5fr;
         gap: 5rem;
         align-items: start;
     }
 
-    /* Left info panel */
-    .booking-info h2 {
-        font-size: 1.4rem;
-        margin-bottom: 0.6rem;
+    /* Left panel */
+    .booking-panel {
+        position: sticky;
+        top: 100px;
     }
 
-    .info-block {
-        margin-top: 2rem;
+    .booking-panel p {
+        margin-top: 1rem;
+        font-size: 1.05rem;
+    }
+
+    .info-cards {
+        margin-top: 2.5rem;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.75rem;
     }
 
-    .info-row {
+    .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
         display: flex;
         gap: 1rem;
         align-items: flex-start;
-        padding: 1rem;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background: var(--card);
     }
 
-    .info-icon {
-        font-size: 1.2rem;
+    .info-card-icon {
+        font-size: 1.3rem;
         flex-shrink: 0;
-        margin-top: 0.1rem;
     }
 
-    .info-label {
-        font-size: 0.68rem;
-        font-weight: 600;
+    .info-card-label {
+        font-size: 0.65rem;
+        font-weight: 700;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 0.2rem;
+        color: var(--blue);
     }
 
-    .info-val {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1rem;
+    .info-card-val {
+        font-size: 0.9rem;
         color: var(--text);
+        margin-top: 0.2rem;
     }
 
     /* Form */
     .booking-form {
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 6px;
+        border-radius: 12px;
         padding: 2.5rem;
         position: relative;
         overflow: hidden;
@@ -74,33 +77,36 @@
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(to right, var(--red), var(--gold), var(--cream));
+        background: linear-gradient(to right, var(--blue-dk), var(--blue), var(--cyan));
     }
 
-    .form-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        color: var(--cream);
-        margin-bottom: 0.4rem;
+    .form-heading {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--white);
+        letter-spacing: 0.04em;
     }
 
     .form-sub {
         font-size: 0.9rem;
+        margin-top: 0.4rem;
         margin-bottom: 2rem;
     }
 
     .form-row {
-        margin-bottom: 1.4rem;
+        margin-bottom: 1.2rem;
     }
 
     .form-row label {
         display: block;
         font-size: 0.68rem;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--muted);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.45rem;
     }
 
     .form-row input,
@@ -109,20 +115,20 @@
         width: 100%;
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 4px;
-        padding: 0.85rem 1rem;
-        font-family: 'Raleway', sans-serif;
-        font-size: 0.875rem;
-        color: var(--text);
-        transition: border-color 0.25s;
+        border-radius: 6px;
+        padding: 0.8rem 1rem;
+        font-family: 'Barlow', sans-serif;
+        font-size: 0.9rem;
+        color: var(--white);
         outline: none;
+        transition: border-color 0.25s;
         appearance: none;
     }
 
     .form-row input:focus,
     .form-row select:focus,
     .form-row textarea:focus {
-        border-color: var(--gold);
+        border-color: var(--blue);
     }
 
     .form-row input::placeholder,
@@ -130,52 +136,78 @@
         color: var(--muted);
     }
 
-    .form-row select option {
-        background: var(--surface);
+    .form-row select {
+        cursor: pointer;
     }
 
-    .form-grid {
+    .form-row select option {
+        background: var(--card);
+    }
+
+    .form-row textarea {
+        resize: vertical;
+        min-height: 85px;
+    }
+
+    .form-2col {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
 
-    .form-row textarea {
-        resize: vertical;
-        min-height: 90px;
-    }
-
     .submit-btn {
         width: 100%;
-        padding: 1.1rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.25em;
+        padding: 1rem;
+        font-family: 'Barlow', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        background: var(--gold);
-        color: var(--bg);
+        background: var(--blue);
+        color: #fff;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
-        font-family: 'Raleway', sans-serif;
-        transition: background 0.25s, transform 0.2s;
         margin-top: 0.5rem;
+        transition: background 0.25s, transform 0.2s;
     }
 
     .submit-btn:hover {
-        background: var(--gold-lt);
+        background: var(--blue-lt);
         transform: translateY(-2px);
     }
 
-    /* Success flash */
-    .flash {
-        background: rgba(201, 168, 76, 0.1);
-        border: 1px solid var(--gold);
-        border-radius: 4px;
+    /* Flash */
+    .flash-success {
+        background: rgba(43, 127, 255, 0.1);
+        border: 1px solid var(--blue);
+        border-radius: 6px;
         padding: 1rem 1.2rem;
         margin-bottom: 1.5rem;
         font-size: 0.9rem;
-        color: var(--gold-lt);
+        color: var(--blue-lt);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+        .booking-wrap {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .booking-panel {
+            position: static;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .form-2col {
+            grid-template-columns: 1fr;
+        }
+
+        .booking-form {
+            padding: 1.5rem;
+        }
     }
 </style>
 {% endblock %}
@@ -184,20 +216,19 @@
 
 <div class="booking-wrap">
 
-    <!-- LEFT: INFO -->
-    <div class="booking-info fade fade-1">
-        <div class="section-label">Book a Visit</div>
-        <h1 style="font-size: clamp(2rem,4vw,3rem);">Reserve<br>Your Chair.</h1>
-        <p style="margin-top: 1rem; font-size: 1.1rem;">Choose your service, pick a time, and let us take care of the
-            rest. Walk-ins welcome — appointments guaranteed.</p>
+    <!-- LEFT -->
+    <div class="booking-panel fade fade-1">
+        <div class="label">Book a Visit</div>
+        <h1 style="font-size:clamp(2.2rem,4vw,3.5rem);">Reserve<br>Your Chair.</h1>
+        <p>Appointments get you a guaranteed slot. Walk-ins welcome when space allows.</p>
 
-        <div class="info-block">
+        <div class="info-cards">
             {% for info in shop_info %}
-            <div class="info-row">
-                <div class="info-icon">{{ info.icon }}</div>
+            <div class="info-card">
+                <div class="info-card-icon">{{ info.icon }}</div>
                 <div>
-                    <div class="info-label">{{ info.label }}</div>
-                    <div class="info-val">{{ info.value }}</div>
+                    <div class="info-card-label">{{ info.label }}</div>
+                    <div class="info-card-val">{{ info.value }}</div>
                 </div>
             </div>
             {% endfor %}
@@ -207,17 +238,17 @@
     <!-- RIGHT: FORM -->
     <div class="booking-form fade fade-3">
         {% if booked %}
-        <div class="flash">
-            ✅ Booking confirmed! We'll see you soon, {{ booked_name }}. A confirmation will be sent to {{ booked_email
-            }}.
+        <div class="flash-success">
+            ✅ <strong>Booking confirmed!</strong><br>
+            Thanks {{ booked_name }}, we'll see you soon. A confirmation has been sent to {{ booked_email }}.
         </div>
         {% endif %}
 
-        <div class="form-title">Book Appointment</div>
-        <p class="form-sub">Fill in your details below to reserve your slot.</p>
+        <div class="form-heading">Book Appointment</div>
+        <p class="form-sub">Fill in your details and we'll confirm your slot.</p>
 
         <form method="POST" action="/booking">
-            <div class="form-grid">
+            <div class="form-2col">
                 <div class="form-row">
                     <label>First Name</label>
                     <input type="text" name="first_name" placeholder="Chinonso" required>
@@ -241,14 +272,14 @@
             <div class="form-row">
                 <label>Select Service</label>
                 <select name="service" required>
-                    <option value="" disabled selected>Choose a service...</option>
-                    {% for service in services %}
-                    <option value="{{ service }}">{{ service }}</option>
+                    <option value="" disabled selected>Choose a service…</option>
+                    {% for s in services %}
+                    <option value="{{ s }}">{{ s }}</option>
                     {% endfor %}
                 </select>
             </div>
 
-            <div class="form-grid">
+            <div class="form-2col">
                 <div class="form-row">
                     <label>Preferred Date</label>
                     <input type="date" name="date" required>
@@ -256,7 +287,7 @@
                 <div class="form-row">
                     <label>Preferred Time</label>
                     <select name="time" required>
-                        <option value="" disabled selected>Select time...</option>
+                        <option value="" disabled selected>Select time…</option>
                         {% for slot in time_slots %}
                         <option value="{{ slot }}">{{ slot }}</option>
                         {% endfor %}
@@ -267,16 +298,16 @@
             <div class="form-row">
                 <label>Select Barber</label>
                 <select name="barber">
-                    <option value="any">No preference</option>
-                    {% for barber in barbers %}
-                    <option value="{{ barber }}">{{ barber }}</option>
+                    <option value="any">No preference — surprise me</option>
+                    {% for b in barbers %}
+                    <option value="{{ b }}">{{ b }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="form-row">
                 <label>Special Requests (optional)</label>
-                <textarea name="notes" placeholder="Any notes for your barber..."></textarea>
+                <textarea name="notes" placeholder="Any notes for your barber…"></textarea>
             </div>
 
             <button type="submit" class="submit-btn">Confirm Booking →</button>

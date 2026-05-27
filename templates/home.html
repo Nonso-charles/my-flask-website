@@ -8,231 +8,375 @@
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
       gap: 4rem;
-      padding: 8rem 2.5rem 4rem;
-      max-width: 1080px;
+      align-items: center;
+      padding: 8rem 5% 5rem;
+      max-width: 1100px;
       margin: 0 auto;
    }
 
-   .hero-since {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
+   .hero-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
    }
 
-   .hero h1 em {
-      font-style: italic;
-      color: var(--gold);
+   .hero-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--blue);
+   }
+
+   .hero h1 .accent {
+      color: var(--blue);
       display: block;
    }
 
-   .hero-sub {
+   .hero-desc {
+      font-size: 1.1rem;
       margin-top: 1.5rem;
-      max-width: 380px;
-      font-size: 1.15rem;
+      max-width: 420px;
    }
 
-   .hero-actions {
+   .hero-ctas {
       display: flex;
       gap: 1rem;
       margin-top: 2.5rem;
       flex-wrap: wrap;
    }
 
-   /* Decorative side panel */
-   .hero-panel {
+   .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+   }
+
+   .hstat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+   }
+
+   .hstat-lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      letter-spacing: 0.05em;
+   }
+
+   /* Hero image */
+   .hero-img-wrap {
       position: relative;
-      height: 520px;
-      border: 1px solid var(--border);
-      border-radius: 4px;
+   }
+
+   .hero-img {
+      width: 100%;
+      height: 540px;
+      background: var(--charcoal);
+      border-radius: 12px;
       overflow: hidden;
-      background: var(--card);
+      position: relative;
+      border: 1px solid var(--border);
+   }
+
+   /* SVG placeholder barber illustration */
+   .hero-img-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #262b36 0%, #1e2330 100%);
+   }
+
+   .barber-pole-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 1.5rem;
    }
 
-   .hero-panel-bg {
-      position: absolute;
-      inset: 0;
-      background:
-         radial-gradient(ellipse at 30% 20%, rgba(201, 168, 76, 0.12) 0%, transparent 60%),
-         radial-gradient(ellipse at 70% 80%, rgba(139, 44, 44, 0.1) 0%, transparent 60%);
-   }
-
-   .barber-pole {
-      position: relative;
-      width: 60px;
-      height: 220px;
-      border-radius: 30px;
+   .pole {
+      width: 56px;
+      height: 260px;
+      border-radius: 28px;
       overflow: hidden;
-      border: 3px solid rgba(201, 168, 76, 0.3);
-      background: #1a1715;
-      margin-bottom: 2rem;
+      position: relative;
+      border: 3px solid rgba(43, 127, 255, 0.25);
+      background: #1a1d23;
    }
 
    .pole-stripe {
       position: absolute;
       width: 200%;
       height: 28px;
-      background: var(--gold);
-      opacity: 0.85;
       transform-origin: left center;
-      animation: spinPole 3s linear infinite;
+      animation: spin 2.8s linear infinite;
+      left: -50%;
    }
 
-   .pole-stripe.red {
-      background: var(--red);
-      opacity: 0.7;
-   }
-
-   @keyframes spinPole {
+   @keyframes spin {
       from {
-         transform: translateY(-28px) rotate(-35deg);
+         transform: translateY(-28px) rotate(-38deg);
       }
 
       to {
-         transform: translateY(220px) rotate(-35deg);
+         transform: translateY(264px) rotate(-38deg);
       }
    }
 
    .pole-stripe:nth-child(1) {
+      background: var(--blue);
+      opacity: 0.9;
       animation-delay: 0s;
    }
 
    .pole-stripe:nth-child(2) {
-      animation-delay: -0.75s;
-      background: var(--red);
-      opacity: 0.7;
+      background: #fff;
+      opacity: 0.15;
+      animation-delay: -0.7s;
    }
 
    .pole-stripe:nth-child(3) {
-      animation-delay: -1.5s;
+      background: var(--blue);
+      opacity: 0.9;
+      animation-delay: -1.4s;
    }
 
    .pole-stripe:nth-child(4) {
-      animation-delay: -2.25s;
-      background: var(--red);
-      opacity: 0.7;
+      background: #fff;
+      opacity: 0.15;
+      animation-delay: -2.1s;
    }
 
    .pole-stripe:nth-child(5) {
-      animation-delay: -1s;
-      background: #f0e6d0;
+      background: var(--cyan);
       opacity: 0.5;
+      animation-delay: -0.35s;
    }
 
    .pole-stripe:nth-child(6) {
-      animation-delay: -2s;
-      background: #f0e6d0;
+      background: var(--cyan);
       opacity: 0.5;
+      animation-delay: -1.75s;
    }
 
-   .panel-tagline {
-      position: relative;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--gold);
-      text-align: center;
-      padding: 0 1.5rem;
-      line-height: 1.6;
+   .hero-img-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
    }
 
-   /* ── STATS BAR ── */
-   .stats {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+   .hero-img-years {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
       background: var(--surface);
-   }
-
-   .stat {
-      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
       text-align: center;
-      border-right: 1px solid var(--border);
    }
 
-   .stat:last-child {
-      border-right: none;
-   }
-
-   .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
+   .hero-img-years .big {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.5rem;
       font-weight: 900;
-      color: var(--gold);
+      color: var(--blue);
       line-height: 1;
-      display: block;
    }
 
-   .stat-label {
-      font-size: 0.68rem;
+   .hero-img-years .sm {
+      font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-top: 0.4rem;
-      display: block;
    }
 
-   /* ── WHY US ── */
-   .why-grid {
+   /* ── SERVICES STRIP ── */
+   .services-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 5%;
+   }
+
+   .strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+   }
+
+   .strip-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
       margin-top: 2.5rem;
    }
 
-   .why-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
+   .strip-card {
       background: var(--card);
-      transition: border-color 0.3s;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.8rem 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
       animation: fadeUp 0.6s ease both;
    }
 
-   .why-card:hover {
-      border-color: var(--gold);
+   .strip-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
    }
 
-   .why-card:nth-child(1) {
-      animation-delay: 0.1s;
+   .strip-card:nth-child(1) {
+      animation-delay: 0.05s;
    }
 
-   .why-card:nth-child(2) {
-      animation-delay: 0.2s;
+   .strip-card:nth-child(2) {
+      animation-delay: 0.12s;
    }
 
-   .why-card:nth-child(3) {
-      animation-delay: 0.3s;
+   .strip-card:nth-child(3) {
+      animation-delay: 0.19s;
    }
 
-   .why-icon {
-      font-size: 1.8rem;
+   .strip-card:nth-child(4) {
+      animation-delay: 0.26s;
+   }
+
+   .scard-icon {
+      font-size: 2rem;
       margin-bottom: 1rem;
    }
 
-   .why-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--cream);
-      margin-bottom: 0.6rem;
+   .scard-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--white);
+      letter-spacing: 0.04em;
    }
 
-   .why-desc {
-      font-size: 0.95rem;
+   .scard-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-top: 0.5rem;
    }
 
-   .section-pad {
-      padding: 5rem 0;
+   /* ── GALLERY ── */
+   .gallery-section {
+      padding: 5rem 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+   }
+
+   .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 220px 220px;
+      gap: 1rem;
+      margin-top: 2rem;
+   }
+
+   .g-item {
+      background: var(--charcoal);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+   }
+
+   .g-item:first-child {
+      grid-row: 1 / 3;
+   }
+
+   .g-item-label {
+      position: absolute;
+      bottom: 0.8rem;
+      left: 0.8rem;
+      background: rgba(26, 29, 35, 0.85);
+      backdrop-filter: blur(4px);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+   }
+
+   .g-icon {
+      font-size: 3rem;
+      opacity: 0.12;
+   }
+
+   /* ── RESPONSIVE ── */
+   @media (max-width: 900px) {
+      .hero {
+         grid-template-columns: 1fr;
+         gap: 3rem;
+         padding-top: 6rem;
+         min-height: unset;
+      }
+
+      .hero-img {
+         height: 320px;
+      }
+
+      .strip-grid {
+         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+         grid-template-columns: 1fr 1fr;
+         grid-template-rows: repeat(3, 180px);
+      }
+
+      .g-item:first-child {
+         grid-row: unset;
+      }
+   }
+
+   @media (max-width: 560px) {
+      .strip-grid {
+         grid-template-columns: 1fr 1fr;
+         gap: 0.75rem;
+      }
+
+      .hero-stats {
+         gap: 1.5rem;
+      }
+
+      .gallery-grid {
+         grid-template-columns: 1fr;
+         grid-template-rows: repeat(5, 160px);
+      }
    }
 </style>
 {% endblock %}
@@ -242,61 +386,101 @@
 <!-- HERO -->
 <section class="hero">
    <div>
-      <p class="hero-since fade fade-1">— Est. 2008, Lagos Island</p>
+      <p class="hero-tag fade fade-1">Est. 2008 · Lagos Island</p>
       <h1 class="fade fade-2">
-         The Art of<br>
-         <em>The Cut.</em>
+         Sharp<br>Cuts.<br>
+         <span class="accent">Bold Style.</span>
       </h1>
-      <p class="hero-sub fade fade-3">
-         Where precision meets tradition. Step into Lagos' finest gentlemen's barbershop and leave looking — and feeling
-         — exceptional.
-      </p>
-      <div class="hero-actions fade fade-4">
-         <a href="/booking" class="btn btn-gold">Book Appointment</a>
-         <a href="/services" class="btn btn-outline">View Services</a>
+      <p class="hero-desc fade fade-3">Lagos' most trusted barbershop. Walk in looking good — walk out looking
+         unstoppable.</p>
+      <div class="hero-ctas fade fade-4">
+         <a href="/booking" class="btn btn-blue">Book Now</a>
+         <a href="/services" class="btn btn-outline">Our Services</a>
+      </div>
+      <div class="hero-stats fade fade-5">
+         {% for stat in stats %}
+         <div>
+            <div class="hstat-num">{{ stat.number }}</div>
+            <div class="hstat-lbl">{{ stat.label }}</div>
+         </div>
+         {% endfor %}
       </div>
    </div>
 
-   <div class="hero-panel fade fade-3">
-      <div class="hero-panel-bg"></div>
-      <div class="barber-pole">
-         <div class="pole-stripe"></div>
-         <div class="pole-stripe red"></div>
-         <div class="pole-stripe"></div>
-         <div class="pole-stripe red"></div>
-         <div class="pole-stripe"></div>
-         <div class="pole-stripe"></div>
+   <div class="hero-img-wrap fade fade-3">
+      <div class="hero-img">
+         <div class="hero-img-inner">
+            <div class="barber-pole-wrap">
+               <div class="pole">
+                  <div class="pole-stripe"></div>
+                  <div class="pole-stripe"></div>
+                  <div class="pole-stripe"></div>
+                  <div class="pole-stripe"></div>
+                  <div class="pole-stripe"></div>
+                  <div class="pole-stripe"></div>
+               </div>
+               <p
+                  style="font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);opacity:0.6;">
+                  Since 2008</p>
+            </div>
+         </div>
+         <div class="hero-img-badge">Premium Barbershop</div>
+         <div class="hero-img-years">
+            <div class="big">16</div>
+            <div class="sm">Years</div>
+         </div>
       </div>
-      <p class="panel-tagline">"A man who looks good<br>feels good — we make<br>that happen."</p>
    </div>
 </section>
 
-<!-- STATS -->
-<div class="stats fade fade-5">
-   {% for stat in stats %}
-   <div class="stat">
-      <span class="stat-num">{{ stat.number }}</span>
-      <span class="stat-label">{{ stat.label }}</span>
-   </div>
-   {% endfor %}
-</div>
-
-<!-- WHY US -->
-<div class="container section-pad">
-   <div style="text-align:center; margin-bottom:1rem;" class="fade fade-1">
-      <div class="section-label" style="justify-content:center;">Why Choose Us</div>
-      <h2>The Blade & Grace<br>Difference</h2>
-   </div>
-
-   <div class="why-grid">
-      {% for item in why %}
-      <div class="why-card">
-         <div class="why-icon">{{ item.icon }}</div>
-         <div class="why-title">{{ item.title }}</div>
-         <p class="why-desc">{{ item.desc }}</p>
+<!-- SERVICES STRIP -->
+<div class="services-strip">
+   <div class="strip-inner">
+      <div class="label fade fade-1">What We Do</div>
+      <h2 class="fade fade-2">Top Services</h2>
+      <div class="strip-grid">
+         {% for card in top_services %}
+         <div class="strip-card">
+            <div class="scard-icon">{{ card.icon }}</div>
+            <div class="scard-name">{{ card.name }}</div>
+            <div class="scard-price">₦{{ card.price }}</div>
+         </div>
+         {% endfor %}
       </div>
-      {% endfor %}
    </div>
 </div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+   <div class="label fade fade-1">The Shop</div>
+   <h2 class="fade fade-2">Inside Blade & Grace</h2>
+
+   <div class="gallery-grid fade fade-3">
+      <div class="g-item">
+         <div class="g-icon">💈</div>
+         <div class="g-item-label">The Main Floor</div>
+      </div>
+      <div class="g-item">
+         <div class="g-icon">✂️</div>
+         <div class="g-item-label">Precision Work</div>
+      </div>
+      <div class="g-item">
+         <div class="g-icon">🪒</div>
+         <div class="g-item-label">Hot Towel Shave</div>
+      </div>
+      <div class="g-item">
+         <div class="g-icon">🧴</div>
+         <div class="g-item-label">Products</div>
+      </div>
+      <div class="g-item">
+         <div class="g-icon">👑</div>
+         <div class="g-item-label">VIP Chair</div>
+      </div>
+   </div>
+
+   <div style="text-align:center; margin-top:3rem;" class="fade fade-4">
+      <a href="/booking" class="btn btn-blue">Reserve Your Spot</a>
+   </div>
+</section>
 
 {% endblock %}

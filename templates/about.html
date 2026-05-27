@@ -4,8 +4,8 @@
 {% block head %}
 <style>
     .about-hero {
-        padding: 7rem 2.5rem 4rem;
-        max-width: 1080px;
+        padding: 7rem 5% 4rem;
+        max-width: 1100px;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -13,42 +13,69 @@
         align-items: center;
     }
 
-    .about-hero p {
-        font-size: 1.15rem;
-        margin-top: 1.2rem;
-    }
-
-    /* Large decorative number */
-    .deco-num {
-        font-family: 'Playfair Display', serif;
-        font-size: 12rem;
-        font-weight: 900;
-        color: var(--border);
-        line-height: 1;
-        user-select: none;
-    }
-
-    .deco-block {
-        position: relative;
+    .about-img {
+        height: 480px;
+        background: var(--charcoal);
+        border-radius: 12px;
         border: 1px solid var(--border);
-        border-radius: 4px;
-        background: var(--card);
-        padding: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
         overflow: hidden;
-        text-align: center;
     }
 
-    .deco-block::after {
-        content: '';
+    .about-img-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .scissors-icon {
+        font-size: 5rem;
+        opacity: 0.15;
+    }
+
+    .about-img-overlay {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        height: 3px;
-        background: linear-gradient(to right, var(--red), var(--gold), var(--cream));
+        background: linear-gradient(to top, rgba(26, 29, 35, 0.95), transparent);
+        padding: 2rem;
     }
 
-    /* Team grid */
+    .about-img-quote {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--blue-lt);
+        line-height: 1.4;
+    }
+
+    .about-text .label {
+        display: block;
+    }
+
+    .about-text p {
+        margin-top: 1rem;
+        font-size: 1.05rem;
+    }
+
+    /* Team */
+    .team-section {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 5rem 5%;
+    }
+
+    .team-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
     .team-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -59,15 +86,15 @@
     .barber-card {
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 4px;
+        border-radius: 10px;
         overflow: hidden;
-        transition: transform 0.3s, border-color 0.3s;
+        transition: border-color 0.3s, transform 0.3s;
         animation: fadeUp 0.6s ease both;
     }
 
     .barber-card:hover {
+        border-color: var(--blue);
         transform: translateY(-5px);
-        border-color: var(--gold);
     }
 
     .barber-card:nth-child(1) {
@@ -82,146 +109,181 @@
         animation-delay: 0.25s;
     }
 
-    .barber-avatar {
-        height: 180px;
-        background: var(--surface);
+    .barber-photo {
+        height: 200px;
+        background: var(--charcoal);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 4rem;
         border-bottom: 1px solid var(--border);
         position: relative;
         overflow: hidden;
     }
 
-    .barber-avatar::before {
-        content: '';
+    .barber-photo-bg {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 50% 100%, rgba(201, 168, 76, 0.08), transparent 70%);
+        background: radial-gradient(ellipse at 50% 100%, rgba(43, 127, 255, 0.1), transparent 70%);
+    }
+
+    .barber-emoji {
+        font-size: 4.5rem;
+        position: relative;
     }
 
     .barber-info {
-        padding: 1.4rem;
+        padding: 1.5rem;
     }
 
     .barber-name {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.1rem;
-        color: var(--cream);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--white);
     }
 
     .barber-role {
-        font-size: 0.7rem;
+        font-size: 0.72rem;
+        font-weight: 600;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: var(--gold);
-        margin-top: 0.3rem;
+        color: var(--blue);
+        margin-top: 0.25rem;
     }
 
     .barber-bio {
         font-size: 0.9rem;
-        margin-top: 0.7rem;
-    }
-
-    .section-pad {
-        padding: 5rem 0;
-    }
-
-    .section-pad .container {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 2.5rem;
+        margin-top: 0.8rem;
+        line-height: 1.65;
     }
 
     /* Values */
-    .values-list {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+    .values-section {
+        padding: 5rem 5%;
+        max-width: 1100px;
+        margin: 0 auto;
     }
 
-    .value-row {
+    .values-grid {
         display: grid;
-        grid-template-columns: 48px 1fr;
-        gap: 1.5rem;
-        align-items: start;
-        padding: 1.5rem;
-        border: 1px solid var(--border);
-        border-radius: 4px;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2.5rem;
+    }
+
+    .value-card {
         background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        padding: 1.5rem;
         animation: fadeUp 0.6s ease both;
     }
 
-    .value-row:nth-child(1) {
+    .value-card:nth-child(1) {
         animation-delay: 0.05s;
     }
 
-    .value-row:nth-child(2) {
+    .value-card:nth-child(2) {
         animation-delay: 0.12s;
     }
 
-    .value-row:nth-child(3) {
+    .value-card:nth-child(3) {
         animation-delay: 0.19s;
     }
 
-    .value-row:nth-child(4) {
+    .value-card:nth-child(4) {
         animation-delay: 0.26s;
     }
 
     .value-num {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2.5rem;
         font-weight: 900;
-        color: var(--gold);
-        opacity: 0.5;
+        color: var(--blue);
+        opacity: 0.25;
+        line-height: 1;
+        margin-bottom: 0.5rem;
     }
 
     .value-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1rem;
-        color: var(--cream);
-        margin-bottom: 0.3rem;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--white);
+        letter-spacing: 0.05em;
     }
 
     .value-desc {
         font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+        .about-hero {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .about-img {
+            height: 280px;
+        }
+
+        .team-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<!-- ABOUT HERO -->
 <section class="about-hero">
-    <div>
-        <div class="section-label fade fade-1">Our Story</div>
-        <h1 class="fade fade-2" style="font-size: clamp(2.5rem,5vw,4rem);">
-            16 Years of<br>Mastery.
-        </h1>
-        <p class="fade fade-3">{{ story }}</p>
-        <p class="fade fade-4" style="margin-top: 1rem;">{{ story2 }}</p>
+    <div class="about-img fade fade-2">
+        <div class="about-img-inner">
+            <div class="scissors-icon">✂️</div>
+        </div>
+        <div class="about-img-overlay">
+            <p class="about-img-quote">"Every great cut starts with a conversation and ends with confidence."</p>
+        </div>
     </div>
-    <div class="deco-block fade fade-3">
-        <div class="deco-num">16</div>
-        <p style="font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Years in
-            Business</p>
+
+    <div class="about-text">
+        <div class="label fade fade-1">Our Story</div>
+        <h1 class="fade fade-2" style="font-size: clamp(2.5rem,5vw,4rem);">16 Years<br>of Craft.</h1>
+        <p class="fade fade-3">{{ story }}</p>
+        <p class="fade fade-4">{{ story2 }}</p>
+        <div class="fade fade-5" style="margin-top:2rem;">
+            <a href="/booking" class="btn btn-blue">Book With Us</a>
+        </div>
     </div>
 </section>
 
-<hr class="gold-rule" style="margin: 0 2.5rem;">
-
-<!-- TEAM -->
-<section class="section-pad">
-    <div class="container">
-        <div class="section-label fade fade-1">The Crew</div>
+<div class="team-section">
+    <div class="team-inner">
+        <div class="label fade fade-1">The Crew</div>
         <h2 class="fade fade-2">Meet the Barbers</h2>
 
         <div class="team-grid">
             {% for barber in team %}
             <div class="barber-card">
-                <div class="barber-avatar">{{ barber.emoji }}</div>
+                <div class="barber-photo">
+                    <div class="barber-photo-bg"></div>
+                    <div class="barber-emoji">{{ barber.emoji }}</div>
+                </div>
                 <div class="barber-info">
                     <div class="barber-name">{{ barber.name }}</div>
                     <div class="barber-role">{{ barber.role }}</div>
@@ -231,27 +293,20 @@
             {% endfor %}
         </div>
     </div>
-</section>
+</div>
 
-<hr class="gold-rule" style="margin: 0 2.5rem;">
+<section class="values-section">
+    <div class="label fade fade-1">What We Stand For</div>
+    <h2 class="fade fade-2">Our Values</h2>
 
-<!-- VALUES -->
-<section class="section-pad">
-    <div class="container">
-        <div class="section-label fade fade-1">What We Stand For</div>
-        <h2 class="fade fade-2">Our Values</h2>
-
-        <div class="values-list">
-            {% for val in values %}
-            <div class="value-row">
-                <div class="value-num">0{{ loop.index }}</div>
-                <div>
-                    <div class="value-title">{{ val.title }}</div>
-                    <p class="value-desc">{{ val.desc }}</p>
-                </div>
-            </div>
-            {% endfor %}
+    <div class="values-grid">
+        {% for val in values %}
+        <div class="value-card">
+            <div class="value-num">0{{ loop.index }}</div>
+            <div class="value-title">{{ val.title }}</div>
+            <p class="value-desc">{{ val.desc }}</p>
         </div>
+        {% endfor %}
     </div>
 </section>
 

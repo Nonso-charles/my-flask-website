@@ -3,145 +3,154 @@
 
 {% block head %}
 <style>
-    .services-hero {
-        padding: 7rem 2.5rem 3rem;
-        max-width: 1080px;
+    .services-header {
+        padding: 7rem 5% 3rem;
+        max-width: 1100px;
         margin: 0 auto;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: end;
     }
 
-    .services-hero p {
-        max-width: 520px;
-        margin: 1rem auto 0;
-        font-size: 1.15rem;
+    .services-header p {
+        font-size: 1.05rem;
+        margin-top: 1rem;
+        max-width: 400px;
     }
 
-    /* Category tabs */
-    .tabs {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin: 2.5rem 0 3rem;
-        flex-wrap: wrap;
+    .services-header-right {
+        text-align: right;
     }
 
-    .tab-btn {
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        padding: 0.6rem 1.4rem;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-        background: transparent;
+    .price-note {
+        font-size: 0.8rem;
         color: var(--muted);
-        cursor: pointer;
-        transition: all 0.25s;
-        font-family: 'Raleway', sans-serif;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        display: inline-block;
+        text-align: left;
     }
 
-    .tab-btn.active,
-    .tab-btn:hover {
-        border-color: var(--gold);
-        color: var(--gold);
-        background: rgba(201, 168, 76, 0.06);
+    .price-note strong {
+        color: var(--blue);
+        font-size: 1rem;
     }
 
-    /* Services grid */
+    /* Grid */
     .services-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 2.5rem 5rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        max-width: 1100px;
+        margin: 3rem auto 0;
+        padding: 0 5% 5rem;
     }
 
     .service-card {
-        border: 1px solid var(--border);
-        border-radius: 4px;
         background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
         padding: 2rem;
         display: flex;
         flex-direction: column;
-        transition: border-color 0.3s, transform 0.3s;
-        animation: fadeUp 0.6s ease both;
         position: relative;
         overflow: hidden;
+        transition: border-color 0.3s, transform 0.3s;
+        animation: fadeUp 0.6s ease both;
     }
 
-    .service-card::before {
+    .service-card::after {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 2px;
-        background: linear-gradient(to right, var(--gold), var(--gold-lt));
+        height: 3px;
+        background: var(--blue);
         transform: scaleX(0);
-        transition: transform 0.3s;
         transform-origin: left;
+        transition: transform 0.3s;
     }
 
     .service-card:hover {
-        border-color: var(--border);
+        border-color: var(--blue);
         transform: translateY(-4px);
     }
 
-    .service-card:hover::before {
+    .service-card:hover::after {
         transform: scaleX(1);
     }
 
     .service-card:nth-child(1) {
-        animation-delay: 0.05s;
+        animation-delay: 0.03s;
     }
 
     .service-card:nth-child(2) {
-        animation-delay: 0.10s;
+        animation-delay: 0.07s;
     }
 
     .service-card:nth-child(3) {
-        animation-delay: 0.15s;
+        animation-delay: 0.11s;
     }
 
     .service-card:nth-child(4) {
-        animation-delay: 0.20s;
+        animation-delay: 0.15s;
     }
 
     .service-card:nth-child(5) {
-        animation-delay: 0.25s;
+        animation-delay: 0.19s;
     }
 
     .service-card:nth-child(6) {
-        animation-delay: 0.30s;
+        animation-delay: 0.23s;
     }
 
     .service-card:nth-child(7) {
-        animation-delay: 0.35s;
+        animation-delay: 0.27s;
     }
 
     .service-card:nth-child(8) {
-        animation-delay: 0.40s;
+        animation-delay: 0.31s;
     }
 
-    .service-icon {
-        font-size: 2rem;
+    .popular-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--blue);
+        color: #fff;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.7rem;
+        border-radius: 4px;
+    }
+
+    .svc-icon {
+        font-size: 2.2rem;
         margin-bottom: 1rem;
     }
 
-    .service-name {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.15rem;
-        color: var(--cream);
-        margin-bottom: 0.6rem;
+    .svc-name {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--white);
     }
 
-    .service-desc {
-        font-size: 0.9rem;
+    .svc-desc {
+        font-size: 0.88rem;
+        margin-top: 0.5rem;
         flex: 1;
+        line-height: 1.7;
     }
 
-    .service-footer {
+    .svc-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -150,14 +159,15 @@
         border-top: 1px solid var(--border);
     }
 
-    .service-price {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--gold);
+    .svc-price {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: var(--blue);
+        line-height: 1;
     }
 
-    .service-duration {
+    .svc-dur {
         font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 0.15em;
@@ -165,51 +175,72 @@
         color: var(--muted);
     }
 
-    .popular-badge {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        background: var(--gold);
-        color: var(--bg);
-        padding: 0.25rem 0.6rem;
-        border-radius: 2px;
+    /* CTA */
+    .services-cta {
+        text-align: center;
+        padding: 0 5% 5rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+        .services-header {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .services-header-right {
+            text-align: left;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 560px) {
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<div class="services-hero">
-    <div class="section-label fade fade-1" style="justify-content:center;">The Menu</div>
-    <h1 class="fade fade-2" style="font-size: clamp(2.5rem,5vw,4rem);">Services &<br>Pricing.</h1>
-    <p class="fade fade-3">Every service is performed with precision tools, premium products, and a commitment to your
-        best look.</p>
+<div class="services-header">
+    <div>
+        <div class="label fade fade-1">The Menu</div>
+        <h1 class="fade fade-2" style="font-size:clamp(2.5rem,5vw,4rem);">Services &<br>Pricing.</h1>
+        <p class="fade fade-3">Every service is delivered with precision tools, premium products, and zero rush.</p>
+    </div>
+    <div class="services-header-right fade fade-3">
+        <div class="price-note">
+            <strong>Walk-ins welcome</strong><br>
+            Appointments guaranteed.<br>
+            Book online or call us.
+        </div>
+    </div>
 </div>
 
 <div class="services-grid">
-    {% for service in services %}
+    {% for s in services %}
     <div class="service-card">
-        {% if service.popular %}
-        <span class="popular-badge">Popular</span>
-        {% endif %}
-        <div class="service-icon">{{ service.icon }}</div>
-        <div class="service-name">{{ service.name }}</div>
-        <p class="service-desc">{{ service.desc }}</p>
-        <div class="service-footer">
-            <span class="service-price">₦{{ service.price }}</span>
-            <span class="service-duration">{{ service.duration }}</span>
+        {% if s.popular %}<span class="popular-badge">Popular</span>{% endif %}
+        <div class="svc-icon">{{ s.icon }}</div>
+        <div class="svc-name">{{ s.name }}</div>
+        <p class="svc-desc">{{ s.desc }}</p>
+        <div class="svc-footer">
+            <span class="svc-price">₦{{ s.price }}</span>
+            <span class="svc-dur">{{ s.duration }}</span>
         </div>
     </div>
     {% endfor %}
 </div>
 
-<div style="text-align:center; padding: 0 2.5rem 5rem;">
-    <p style="margin-bottom: 1.5rem; font-size:1.1rem;">Ready to look your best?</p>
-    <a href="/booking" class="btn btn-gold">Book Your Appointment</a>
+<div class="services-cta fade fade-4">
+    <p style="margin-bottom:1.5rem; font-size:1.1rem;">Ready to book? Pick your service and reserve your chair.</p>
+    <a href="/booking" class="btn btn-blue">Book an Appointment</a>
 </div>
 
 {% endblock %}
